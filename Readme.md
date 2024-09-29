@@ -1,7 +1,7 @@
  # Личный проект «Кекстаграм»
 
 * Студент: [Нестор Щипакин](https://up.htmlacademy.ru/javascript-individual/2/user/2450679).
-* Наставник: [Анна Лисенкова](https://htmlacademy.ru/profile/id85590).
+* Наставник: [Анна Лисенекова](https://htmlacademy.ru/profile/id85590).
 
 ---
 
