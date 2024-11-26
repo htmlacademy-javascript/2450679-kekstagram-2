@@ -1,5 +1,6 @@
-  
+
 const PHOTOS_COUNT = 25;
+
 
 const messages = [
   "Всё отлично!",
@@ -12,9 +13,9 @@ const messages = [
 
 const names = ["Артём", "Ольга", "Сергей", "Елена", "Дмитрий", "Мария", "Иван", "Анна"];
 
+
 function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
+    
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -22,36 +23,38 @@ function getRandomAvatar() {
   return `img/avatar-${getRandomInt(1, 6)}.svg`;
 }
 
-function generateComments(numComments) {
-  const comments = [];
-  const usedIds = new Set(); // объявление здесь
+function getRandomComment() {
+  const numMessages = getRandomInt(1, 2);
+  return messages.slice(0, numMessages).join(' ').trim();
+}
 
-  for (let i = 0; i < numComments; i++) {
-    let id;
-    do {
-      id = getRandomInt(1, 1000);
-    } while (usedIds.has(id));
-    usedIds.add(id);
 
-    const numMessages = getRandomInt(1, 2);
-    let message = "";
-    for (let j = 0; j < numMessages; j++) {
-      message += messages[getRandomInt(0, messages.length - 1)] + " ";
-    }
-    message = message.trim();
-
-    comments.push({
-      id: id,
+function generateComment(id) {
+    return {
+      id,
       avatar: getRandomAvatar(),
-      message: message,
+      message: getRandomComment(),
       name: names[getRandomInt(0, names.length - 1)],
-    });
-  }
-  return comments;
+    };
+}
+
+
+function generateComments(numComments) {
+    const usedIds = new Set();
+    const comments = [];
+    for (let i = 0; i < numComments; i++) {
+        let id;
+        do {
+            id = getRandomInt(1, 1000);
+        } while (usedIds.has(id));
+        usedIds.add(id);
+        comments.push(generateComment(id));
+    }
+    return comments;
 }
 
 function getRandomLikes() {
-  return Math.floor(Math.random() * (200 - 15 + 1)) + 15;
+  return getRandomInt(15, 200);
 }
 
 const photoDescriptions = [
@@ -82,12 +85,11 @@ const photoDescriptions = [
   "Пейзаж с полями и деревенскими домами."
 ];
 
-
-let photoId = 0;
-const photos = Array.from({ length: PHOTOS_COUNT }, () => ({
-  id: ++photoId,
-  url: `photos/${photoId}.jpg`,
-  description: photoDescriptions[photoId - 1],
+// Генерация массива фотографий
+const photos = Array.from({ length: PHOTOS_COUNT }, (v, i) => ({
+  id: i + 1,
+  url: `photos/${i + 1}.jpg`,
+  description: photoDescriptions[i],
   likes: getRandomLikes(),
   comments: generateComments(getRandomInt(0, 30)),
 }));
