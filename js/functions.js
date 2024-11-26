@@ -5,13 +5,14 @@ const checkLineLength = (length,number) =>{
 console.log(checkLineLength('строка для проверки', 5 ));
 console.log(checkLineLength('строка для проверки', 18 ));
 
-function isPalindrome(str) {
-    let check = 'проверочная строка';
+function checkPalindrome(str) {
+    let checkStr = '';
+    str.toLowerCase().replaceAll(' ', '');
     for (let i = str.length - 1; i >= 0; --i) {
-      check += str[i];
+      checkStr += str[i];
     }
-    return str == check;
+    return str == checkStr;
   }
-  console.log(isPalindrome('топот'))
-  console.log(isPalindrome('ворота'))
+  console.log(checkPalindrome('топот'))
+  console.log(checkPalindrome('ворота'))
   
